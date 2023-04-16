@@ -1,0 +1,7 @@
+Commands:
+    list: list all clients
+    connect <ip> <port>: connect to a client
+    register: register a new client
+    quit: quit the program
+    history: show connection history
+    help: show help text
