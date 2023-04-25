@@ -41,5 +41,5 @@ def get_history_connections():
     c.execute("SELECT connection_time, username1, ip_addr1, username2, ip_addr2, message FROM history_connections")
     return c.fetchall()
 
-# insert_clients("test1", "test")
-# print(get_clients()[1][0])
+# insert_clients("test1", "127.0.0.1")
+# print(get_clients())

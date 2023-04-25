@@ -12,7 +12,10 @@ from applescript import tell
 
 import sqlite_op
 
-my_info = {'id': 0, 'name': 'Console', 'ip': '127.0.0.1'}
+my_info = {'id': 0, 'name': 'Default User', 'ip': '127.0.0.1'}
+if len(sys.argv) == 2:
+    my_info['name'] = sys.argv[1]
+server_ip = '127.0.0.1'
 
 # listen to the port
 listen_port = 8080
@@ -23,15 +26,15 @@ listen_thread_input_sign = queue.Queue()
 
 # console thread's function
 def console_thread():
-    print('Welcome to chat console!')
-    print('Type "help" to see all commands.\n')
-    print('This app is ONLY available on MacOS for now, DO NOT run it on other platforms!\n')
+    print('Welcome to chat console!\n')
+    print('\033[91m' + 'This app is ONLY available on MacOS for now, DO NOT run it on other platforms!\n' + '\033[0m')
 
     # create a thread to listen to the port
     listen_thread_console = threading.Thread(target=listen_thread)
     listen_thread_console.setDaemon(True)
     listen_thread_console.start()
     sleep(1)
+    print('\nType "help" to see all commands.')
     # loop forever until receive quit command
     while True:
         print(my_info['name'] + '@' + my_info['ip'] + ':~$ ', end='')

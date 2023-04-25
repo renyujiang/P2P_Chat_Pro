@@ -1,5 +1,5 @@
-# P2P Chat Program - EC530
-This is EC530 P2P Chat project.
+# P2P Pro - EC530
+This is EC530 P2P Pro project.
 
 ## Requirements
 

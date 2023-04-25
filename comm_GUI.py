@@ -1,3 +1,4 @@
+import os
 import queue
 import socket
 import sys
@@ -57,7 +58,7 @@ class P2P_Chat_Comm(QtWidgets.QMainWindow):
         message = 'this_is_to_close_connection'
         print('close connection')
         self.updateDisplay_msg('System', 'Connection closed, windows automatically close in three seconds')
-        app.quit()
+        os._exit(0)
 
     def clearButton_clicked(self):
         self.chatDisplay.clear()
