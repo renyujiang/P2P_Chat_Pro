@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify, send_from_directory
 import sqlite3
 
 app = Flask(__name__)
@@ -32,7 +32,7 @@ def login():
 
         c.execute("SELECT password FROM users WHERE username=?", (username,))
 
-        ret= c.fetchone()
+        ret = c.fetchone()
         if ret is None:
             return 'Fail'
 
@@ -86,6 +86,26 @@ def add_client():
     except Exception as e:
         print(e)
         return 'Fail'
+
+
+@app.route('/upload', methods=['POST'])
+def upload():
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file uploaded'}), 400
+
+    file = request.files['file']
+    filename = file.filename
+    file.save('./uploaded_files/' + filename)
+
+    return jsonify({'filename': filename}), 200
+
+
+app.config['UPLOAD_FOLDER'] = 'uploaded_files'
+
+
+@app.route('/share/<filename>', methods=['GET'])
+def download(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename, as_attachment=True)
 
 
 if __name__ == '__main__':

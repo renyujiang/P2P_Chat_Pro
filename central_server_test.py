@@ -20,12 +20,14 @@
 
 import requests
 
-url = 'http://127.0.0.1:10000/login'
-params = {'username': 'test1', 'password': '123456'}
-response = requests.get(url, params=params)
+url = 'http://127.0.0.1:10000/upload'
+files = {'file': open('comm.py', 'rb')}
+
+response = requests.post(url, files=files)
 
 if response.status_code == 200:
-    print(response.content.decode('utf-8'))
+    print(f'Successfully uploaded file: {response.json()["filename"]}')
 else:
-    print(f'Login failed: {response.status_code}')
+    print(f'Failed to upload file: {response.json()["error"]}')
+
 
