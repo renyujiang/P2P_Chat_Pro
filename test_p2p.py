@@ -66,3 +66,4 @@ class TestCommunication(unittest.TestCase):
             self.assertIn(i, expected_output_tuple)
 
         sys.stdout = original_stdout
+
