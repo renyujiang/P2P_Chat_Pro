@@ -14,7 +14,7 @@ import sqlite_op
 
 my_info = {'id': 0, 'name': 'Default User', 'ip': '127.0.0.1'}
 if len(sys.argv) == 2:
-    my_info['name'] = sys.argv[2]
+    my_info['name'] = sys.argv[1]
 server_ip = '127.0.0.1'
 
 # listen to the port
