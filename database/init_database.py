@@ -15,7 +15,7 @@ if result:
     print(f"table {target_table_name} exists")
 else:
     # create table users
-    c.execute('''CREATE TABLE clients (uid INTEGER PRIMARY KEY AUTOINCREMENT, username text NOT NULL, 
+    c.execute('''CREATE TABLE clients (uid INTEGER PRIMARY KEY AUTOINCREMENT, username text NOT NULL UNIQUE, 
     ip_addr text NOT NULL)''')
     print("create table " + target_table_name)
 

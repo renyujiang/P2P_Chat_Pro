@@ -21,13 +21,15 @@
 import requests
 
 url = 'http://127.0.0.1:10000/upload'
-files = {'file': open('comm.py', 'rb')}
+filename = '/Users/renyujiang/Desktop/EC530/Assignments/P2P_Chat_Pro/central_server_test.py'
+username = 'test2'
 
-response = requests.post(url, files=files)
+with open(filename, 'rb') as f:
+    files = {'file': f}
+    data = {'username': username}
+    response = requests.post(url, files=files, data=data)
 
-if response.status_code == 200:
-    print(f'Successfully uploaded file: {response.json()["filename"]}')
+if response.ok:
+    print('File uploaded successfully')
 else:
-    print(f'Failed to upload file: {response.json()["error"]}')
-
-
+    print('Error uploading file')

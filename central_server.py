@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, request, jsonify, send_from_directory
 import sqlite3
 
@@ -88,24 +90,52 @@ def add_client():
         return 'Fail'
 
 
+@app.route('/delete_client')
+def delete_client():
+    try:
+        # connect to sqlite3 database
+        conn = sqlite3.connect('database/ec530_sqlite.db')
+        c = conn.cursor()
+        username = request.args.get('username')
+
+        c.execute("DELETE FROM clients WHERE username=?", (username,))
+        conn.commit()
+        c.close()
+        return 'Success'
+    except Exception as e:
+        print(e)
+        return 'Fail'
+
+
 @app.route('/upload', methods=['POST'])
 def upload():
     if 'file' not in request.files:
         return jsonify({'error': 'No file uploaded'}), 400
 
+    username = request.form['username']
     file = request.files['file']
     filename = file.filename
-    file.save('./uploaded_files/' + filename)
+    if not os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], username)):
+        os.makedirs(os.path.join(app.config['UPLOAD_FOLDER'], username))
+    file.save(os.path.join(app.config['UPLOAD_FOLDER'], username, filename))
 
-    return jsonify({'filename': filename}), 200
+    return jsonify({'filename': filename})
 
 
 app.config['UPLOAD_FOLDER'] = 'uploaded_files'
 
 
-@app.route('/share/<filename>', methods=['GET'])
-def download(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'], filename, as_attachment=True)
+@app.route('/share/<username>/<filename>', methods=['GET'])
+def download(username, filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], username+'/'+filename, as_attachment=True)
+
+
+@app.route('/storage')
+def storage():
+    username = request.args.get('username')
+    files = os.listdir(os.path.join(app.config['UPLOAD_FOLDER'], username))
+    return jsonify({'files': files})
+
 
 
 if __name__ == '__main__':
