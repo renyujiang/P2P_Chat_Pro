@@ -180,6 +180,56 @@ def txt_log_function(msg):
         file.write("\n" + formatted_datetime + ": " + msg)
 
 
+def server_unittest():
+    # Create a TCP/IP socket
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    # Bind the socket to a specific address and port
+    server_address = ('localhost', 8080)
+    server_socket.bind(server_address)
+
+    # Listen for incoming connections
+    server_socket.listen(1)
+    print('Server listening on {}:{}'.format(*server_address))
+
+    while True:
+        # Wait for a connection
+        print('Waiting for a connection...')
+        client_socket, client_address = server_socket.accept()
+        print('Accepted connection from {}'.format(*client_address))
+
+        # Receive the data in small chunks and retransmit it
+        data = client_socket.recv(1024)
+        print('Received data:', data.decode())
+        client_socket.sendall(data)
+
+        # Clean up the connection
+        client_socket.close()
+        print('Connection closed')
+        break
+
+
+def client_unittest():
+    # Create a TCP/IP socket
+    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    # Connect the socket to the server's address and port
+    server_address = ('localhost', 8080)
+    client_socket.connect(server_address)
+
+    # Send some data
+    message = 'Hello from the client'.encode()
+    client_socket.sendall(message)
+
+    # Receive the response
+    data = client_socket.recv(1024)
+    print('Received response:', data.decode())
+
+    # Clean up the connection
+    client_socket.close()
+    print('Connection closed')
+
+
 # def get_hyper_link(url):
 #     return f'<a href="{url}" style="color:#ffb61e;font-size:20px;font-family:Microsoft YaHei"><b>{url}</b></a>'
 
