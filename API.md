@@ -54,3 +54,14 @@ Directly using the file:
 ```shell
 python communication.py client <ip> <port> <path> <username> <path>
 ```
+
+## Login and register program - login.py
+Directly run login.py, this is the beginning of the program, it will ask you to log in or register, and then it will call console_GUI.py to start the main program.
+
+## Database functions - init_database.py and sqlite_op.py
+These are the functions for database operations. init_database.py is used to initialize the database, and sqlite_op.py is used to operate the database.
+Be sure to run init_database.py before using the program.
+
+## Test program - test_p2p.py
+This is a simple test program for the P2P Pro project. It is used to test the functions of the P2P project.
+P2P Pro project is a GUI based program, it's hard to design a comprehensive test program for it, So this test program can only test the basic communication functions.
