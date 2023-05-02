@@ -1,6 +1,8 @@
+import os
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QPushButton, QHBoxLayout, QVBoxLayout
 from PyQt5.QtGui import QFont, QColor
+from applescript import tell
 
 server_ip = '127.0.0.1'
 
@@ -75,7 +77,7 @@ class LoginWindow(QWidget):
 
             import requests
 
-            url = 'http://'+server_ip+':10000/login'
+            url = 'http://' + server_ip + ':10000/login'
             params = {'username': username, 'password': password}
             response = requests.get(url, params=params)
 
@@ -83,6 +85,16 @@ class LoginWindow(QWidget):
                 if response.content.decode('utf-8') == 'Success':
                     self.error_label.setText('Login succeeded')
                     self.error_label.setStyleSheet('color: green')
+                    # Get the absolute path of the current file
+                    current_file = os.path.abspath(__file__)
+
+                    # Get the absolute path of the directory containing the current file
+                    current_dir = os.path.dirname(current_file)
+
+                    cmd = 'cd ' + current_dir + '\n '
+                    cmd += 'python ' + 'console_GUI.py ' + username
+                    tell.app('Terminal', 'do script "' + cmd + '"')
+                    exit(0)
                 else:
                     self.error_label.setText('Your username or password is wrong')
                     self.error_label.setStyleSheet('color: red')

@@ -1,34 +1,33 @@
 # P2P Pro - EC530
-This is EC530 P2P Pro project.
+This is P2P Pro project
+
+API doc: API.md
 
 Presentation Link: https://docs.google.com/presentation/d/1jCKI4AsXwgbstk6mi6an6p3H3BnKyAKw_XqlJ0u-bXA/edit?usp=sharing
 
 ## Requirements
 
-### <span style="color:red">This program's full function works on macOS only, don't run it on Windows or Linux.</span>
+### Software: 
+
+System: macOS 13.1 or later version
+
+Python Package: Python 3.7, PyQt5, Flask, requests
+
+### Hardware:
+
+CPU:    It has only been tested on Apple Silicon M1 Pro, but it should work on other Macs with Intel chips.
+
+Memory: 8GB or more
+
+Monitor: 1920x1080 or higher resolution (Low resolution may cause the GUI to be displayed incorrectly)
 
 ### <span style="color:red">This program's full function works on macOS only, don't run it on Windows or Linux.</span>
 
 ### <span style="color:red">This program's full function works on macOS only, don't run it on Windows or Linux.</span>
 
-<div style="display:flex">
-  <img src="./images/MainWindow.png" width="50%" />
-  <img src="./images/ChatWindow.png" width="50%" />
-</div>
+### <span style="color:red">This program's full function works on macOS only, don't run it on Windows or Linux.</span>
 
-## P2P Chat Console with GUI - console_GUI.py
-
-This is a P2P chat program written in Python. It is based on the console version, but it has a GUI interface and more functions.
-
-It allows multiple clients to connect to a user and communicate with each other.
-
-In this program, there is only one console window for all functions, you can call functions by using buttons, so it's easy to use.
-
-Compared to the console version, this version has a GUI interface, so it's more user-friendly. In addition, it has more functions, such as sending files, sending images.
-
-In addition, chatting with other clients is using different processes, so it won't block the main process, you can continue to using other functions while chatting with other clients, including connecting to other clients and receive new connections.
-
-### Features of this program:
+## Features of this program:
 
 1. It has connection confirmation process, so you can reject connections from other clients.
 2. It can send all kinds of files, including images, documents, even python codes.
@@ -36,43 +35,27 @@ In addition, chatting with other clients is using different processes, so it won
 4. Moreover, the processing of connecting other clients is total automatic, you don't need to do anything, just wait for new terminals to show up.
 5. Robust, chatting windows can be closed without affecting the main process and the listening thread wouldn't block the console window's main functions.
 
-### How to use
+## How to use
 
-All functions are in the console window, you can call functions by using buttons.
+Start with login.py, it will call other modules automatically. Remember to start central_server.py first.
 
-## Communication Program with GUI - comm_GUI.py
+If you want to use terminal to run this program, please check the API.md file.
 
-This is a communication program written in Python. This is a simple Python program for socket communication. It can be used to establish a connection between two machines and send/receive messages.
+## User Stories
 
-In this version, comm_GUI also has a GUI interface, so calling it separately is not easy because it needs more arguments. So it is recommended to use it with console_GUI.py.
+1. As a user, I want to be able to send messages to other users, so that I can communicate with them. As a modern chat program, it should be able to communicate with multiple users at the same time.
+2. As a user, I want to be able to send files to other users, including common formats like .docx, .pdf, .png, .jpg, .py, etc.
+3. As a user, I want to be able to send images to other users.
+4. As a user, I want to be able to reject connections from other users, so that I can control who I want to talk to.
+5. As a user, I want a robust program, so that I can use it without worrying about it crashing.
+6. As a user, I want to know how many files I store in remote storage, and what are they.
 
-### Using server mode
-Directly using the file:
-```shell
-python communication.py server <ip> <port> <path> <username>
-```
+## Examples
 
-ip is the ip address of the server be bind to
-
-port is the port of the server listens to
-
-### Using client mode
-Directly using the file:
-```shell
-python communication.py client <ip> <port> <path> <username>
-```
-
-## Central Server Service - central_server.py
-
-This is the core of the P2P Pro project. It is a central server service written in Python. It is used to manage the connection between clients and provide the IP address of the client to other clients.
-
-### How to use
-
-Just run the file:
-```shell
-python central_server.py
-```
-
+<div style="display:flex">
+  <img src="./images/MainWindow.png" width="50%" />
+  <img src="./images/ChatWindow.png" width="50%" />
+</div>
 
 License
 This program is released under the MIT License. See the LICENSE file for details.
