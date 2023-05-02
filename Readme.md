@@ -5,6 +5,10 @@ API doc: API.md
 
 Presentation Link: https://docs.google.com/presentation/d/1jCKI4AsXwgbstk6mi6an6p3H3BnKyAKw_XqlJ0u-bXA/edit?usp=sharing
 
+## Architecture
+
+<img src="./images/P2P Pro Architecture.png" alt="P2P Pro Architecture" style="zoom:50%;" />
+
 ## Requirements
 
 ### Software: 
